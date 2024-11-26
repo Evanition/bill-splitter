@@ -1,5 +1,6 @@
 // src/components/Home.js
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 
@@ -25,5 +26,11 @@ function Home({ user }) {
     </div>
   );
 }
+
+Home.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }),
+};
 
 export default Home;

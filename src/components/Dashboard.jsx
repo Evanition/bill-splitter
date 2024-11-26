@@ -1,15 +1,18 @@
-// src/components/Dashboard.js
 import React from 'react';
 import Bills from './Bills';
 
 function Dashboard({ user, currentBalance }) {
+  if (!user) {
+    return <p>Please log in to view your dashboard.</p>;
+  }
+
   return (
     <div className="dashboard">
-      <h2>Welcome, {user?.username}</h2>
+      <h2>Welcome, {user.username}</h2>
       
       {/* Display Current Balance */}
       <div className="balance-section">
-        <h3>Current Balance: $937.64</h3>
+        <h3>Current Balance: ${currentBalance ? currentBalance.toFixed(2) : '0.00'}</h3>
       </div>
       
       {/* Bills Section */}
@@ -20,6 +23,5 @@ function Dashboard({ user, currentBalance }) {
   );
 }
 
+
 export default Dashboard;
-
-

@@ -1,25 +1,34 @@
 /* Theme Variables */
 :root {
-    --primary-color: #d32f2f;
-    /* Red for primary actions */
-    --primary-hover-color: #b71c1c;
+    --primary-color: #8b0000;
+    /* Dark Red for primary actions */
+    --primary-hover-color: #5c0000;
     /* Darker red for hover effects */
-    --secondary-color: #1976d2;
-    /* Blue for secondary accents */
-    --secondary-hover-color: #1565c0;
+    --secondary-color: #0d47a1;
+    /* Dark Blue for secondary accents */
+    --secondary-hover-color: #002171;
     /* Darker blue for secondary hover */
-    --background-color: #f0f4ff;
-    /* Light blue background */
-    --text-color: #333;
+    --background-color: #1c1c1c;
+    /* Dark background */
+    --text-color: #e0e0e0;
+    /* Light text color */
     --white-color: #fff;
-    --light-gray: #f9f9f9;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --light-gray: #2e2e2e;
+    /* Darker light gray */
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    /* Darker shadow */
     --border-radius: 8px;
-    --paid-color: #2e7d32;
-    /* Green for paid status */
+    --paid-color: #006400;
+    /* Dark Green for paid status */
     --unpaid-color: var(--primary-color);
-    /* Red for unpaid status */
-    --font-family: Arial, sans-serif;
+    /* Dark Red for unpaid status */
+    --font-family: 'Arial', sans-serif;
+    --font-size-base: 16px;
+    --font-size-large: 18px;
+    --font-size-small: 14px;
+    --spacing-base: 15px;
+    --spacing-large: 30px;
+    --spacing-small: 10px;
 }
 
 /* General Reset */
@@ -27,7 +36,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    width: 100%;
 }
 
 /* Body Styles */
@@ -37,15 +45,16 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-base);
 }
 
 /* App Container */
 .App {
     max-width: 1400px;
-    /* Increased width for a wider layout */
     margin: 0;
     padding: 0;
     width: 100%;
@@ -54,6 +63,7 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 /* Button Styles */
 button,
 .button,
@@ -66,15 +76,13 @@ button,
     border: none;
     cursor: pointer;
     border-radius: var(--border-radius);
-    padding: 15px 25px;
-    /* Increased padding for a larger, more clickable button */
-    font-size: 18px;
-    /* Slightly larger font size for readability */
+    padding: var(--spacing-base) var(--spacing-large);
+    font-size: var(--font-size-large);
     transition: background-color 0.3s ease;
     width: 100%;
     max-width: 350px;
-    /* Increased max-width to prevent the buttons from being too narrow */
     text-align: center;
+    margin: var(--spacing-small) auto; /* Center buttons */
 }
 
 button:hover,
@@ -83,49 +91,97 @@ button:hover,
 .retake-button:hover,
 .edit-button:hover,
 .save-button:hover {
-    background-color: var(--primary-color);
-    /* Solid red background on hover */
+    background-color: var(--primary-hover-color);
     color: var(--white-color);
-    /* White text on hover */
+}
+
+button:focus,
+.button:focus,
+.capture-button:focus,
+.retake-button:focus,
+.edit-button:focus,
+.save-button:focus {
+    outline: 2px solid var(--secondary-color);
 }
 
 /* Specific Button Colors for Edit and Save */
 .edit-button {
     border: 2px solid var(--secondary-color);
     background-color: var(--secondary-color);
-    /* Blue background */
     color: var(--white-color);
-    /* White text color */
 }
 
 .edit-button:hover {
     background-color: var(--secondary-hover-color);
     color: var(--white-color);
-    /* White text on hover */
 }
 
 .save-button {
     border: 2px solid var(--primary-color);
-    /* Red border for primary buttons */
 }
 
 .save-button:hover {
     background-color: var(--primary-color);
-    /* Red background on hover */
     color: var(--white-color);
-    /* White text on hover */
 }
 
 /* Headings */
 h1,
 h2,
 h3 {
-    margin-bottom: 30px;
-    /* Add more space under headings */
+    margin-bottom: var(--spacing-large);
     color: var(--primary-color);
     text-align: center;
     font-size: 28px;
-    /* Increased font size for headings */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-large);
+    background-color: var(--light-gray);
+    box-shadow: 0 3px 10px var(--shadow-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: var(--spacing-small);
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+tr:hover {
+    background-color: var(--primary-hover-color);
+    color: var(--white-color);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.status.paid {
+    color: var(--paid-color);
+}
+
+.status.unpaid {
+    color: var(--unpaid-color);
 }
 
 /* Container Styles */
@@ -134,19 +190,17 @@ h3 {
 .bills-page,
 .profile-container,
 .camera-page {
-    background-color: var(--white-color);
-    padding: 30px;
-    /* Increased padding for more space */
+    background-color: var(--light-gray);
+    padding: var(--spacing-large);
     border-radius: var(--border-radius);
     box-shadow: 0 3px 10px var(--shadow-color);
-    /* Slightly larger shadow for more depth */
-    margin: 30px 0;
-    /* More margin between containers */
+    margin: var(--spacing-large) 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     max-width: 800px;
-    /* Set a max-width for better readability */
+    text-align: center;
 }
 
 /* Navbar Styles for Compact Bottom Alignment */
@@ -156,7 +210,7 @@ h3 {
     left: 0;
     width: 100%;
     background-color: var(--secondary-color);
-    padding: 5px 0;
+    padding: var(--spacing-small) 0;
     box-shadow: 0 -2px 5px var(--shadow-color);
     z-index: 1000;
 }
@@ -166,92 +220,30 @@ h3 {
     list-style: none;
     display: flex;
     width: 100%;
-    /* Fill the container */
-    margin: 3;
-    /* Remove margin */    
-    /* Smaller vertical and horizontal padding */    flex-wrap: nowrap;
-    /* Prevent wrapping */
+    margin: 0;
+    flex-wrap: nowrap;
     background-color: transparent;
-    /* Transparent background */
-    gap: 15px;
-    
+    gap: var(--spacing-small);
     justify-content: center;
     padding: 0;
-            /* Remove padding */
-    margin-bottom: 0;
     align-items: center;
-        /* Vertically align the navbar list elements */
 }
 
 /* Navbar Link Styles - Smaller and Horizontal */
 .nav-link {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 14px;
+    font-size: var(--font-size-small);
     font-weight: bold;
-    transition: transparent 0.3s ease, color 0.3s ease;
+    transition: color 0.3s ease;
     flex-grow: 1;
-    /* Make each link fill the container equally */
-    text-align: center;
-    /* Center the text within each link */
-}
-.dashboard {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.balance-section {
-    background-color: var(--light-gray);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 4px var(--shadow-color);
-    margin-bottom: 20px;
     text-align: center;
 }
 
-.balance-section h3 {
-    color: var(--primary-color);
-    /* Red color for the balance text */
-    font-size: 22px;
-    margin: 0;
-}
-.friends-page {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.add-friend-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.add-friend-section input,
-.add-friend-section button {
-    padding: 10px;
-    border-radius: var(--border-radius);
-    border: 1px solid #ccc;
-}
-/* Conditional Styling for Amount Owed */
-.owe {
-    color: var(--primary-color);
-    /* Red for debts (you owe them) */
-}
-
-.owed {
-    color: var(--paid-color);
-    /* Green when they owe you */
-}
 .nav-link:hover,
 .nav-link:focus {
     background-color: var(--primary-hover-color);
-        color: var(--white-color);
-    padding: 0px 0px;
-                /* Smaller padding on hover */
-        /* Smaller padding on hover */
+    color: var(--white-color);
 }
 
 .active-link {
@@ -265,8 +257,8 @@ h3 {
     border: none;
     color: var(--primary-color);
     cursor: pointer;
-    font-size: 14px;
-    padding: 10px 5px;
+    font-size: var(--font-size-small);
+    padding: var(--spacing-small) var(--spacing-base);
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -281,25 +273,23 @@ h3 {
 .transactions-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    /* Increased gap between transactions */
+    gap: var(--spacing-large);
     width: 100%;
 }
 
 .transaction-item {
-    padding: 20px;
-    /* Increased padding inside each transaction */
+    padding: var(--spacing-large);
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
     background-color: var(--light-gray);
     box-shadow: 0 1px 3px var(--shadow-color);
     width: 100%;
+    text-align: center;
 }
 
 .transaction-item p {
-    margin: 10px 0;
-    /* Increased margin between text lines */
-    font-size: 16px;
+    margin: var(--spacing-small) 0;
+    font-size: var(--font-size-base);
 }
 
 .transaction-item .status {
@@ -313,24 +303,10 @@ h3 {
 .transaction-item .status.unpaid {
     color: var(--unpaid-color);
 }
-Copy code .transaction-item {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    background-color: var(--light-gray);
-    box-shadow: 0 1px 3px var(--shadow-color);
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.transaction-item p {
-    margin: 5px 0;
-    font-size: 16px;
-}
 
 .transaction-details {
-    margin-top: 10px;
-    padding-left: 15px;
+    margin-top: var(--spacing-small);
+    padding-left: var(--spacing-base);
     border-left: 2px solid var(--primary-color);
 }
 
@@ -349,52 +325,44 @@ input[type="date"],
 input[type="email"],
 .register input,
 .transaction-item p {
-    padding: 15px;
-    /* Increased padding for inputs */
-    font-size: 16px;
+    padding: var(--spacing-base);
+    font-size: var(--font-size-base);
     border-radius: var(--border-radius);
     border: 1px solid #ccc;
     width: 100%;
-    margin-bottom: 20px;
-    /* Add space below inputs */
+    margin-bottom: var(--spacing-large);
+    text-align: center;
 }
 
 /* Profile Details */
 .profile-details {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    /* Increased gap between profile details */
+    gap: var(--spacing-large);
     width: 100%;
+    text-align: center;
 }
 
 /* Sorting Dropdown Styles */
 .sort-options {
-    margin-bottom: 30px;
-    /* Ensure there's enough space between the dropdown and other elements */
+    margin-bottom: var(--spacing-large);
     display: flex;
     align-items: center;
-    gap: 15px;
-    /* Space between label and select box */
+    gap: var(--spacing-small);
+    justify-content: center;
 }
 
 .sort-options label {
-    font-size: 16px;
-    /* Label text size */
+    font-size: var(--font-size-base);
     color: var(--text-color);
-    /* Make sure label is visible */
 }
 
 .sort-options select {
-    padding: 10px;
-    /* Add padding for a larger clickable area */
+    padding: var(--spacing-small);
     border-radius: var(--border-radius);
     border: 1px solid #ccc;
-    /* Visible border */
-    font-size: 16px;
-    /* Ensure the font size matches the rest of the UI */
-    background-color: var(--white-color);
-    /* Ensure it's visible on light backgrounds */
+    font-size: var(--font-size-base);
+    background-color: var (--white-color);
     color: var(--text-color);
 }
 
@@ -409,7 +377,8 @@ input[type="email"],
     color: #888;
     font-size: 1.2em;
     border-radius: var(--border-radius);
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-large);
+    text-align: center;
 }
 
 /* List Styles */
@@ -419,39 +388,41 @@ ul {
 }
 
 li {
-    padding: 15px;
-    /* Increased padding */
+    padding: var(--spacing-base);
     background-color: var(--light-gray);
-    margin-bottom: 15px;
-    /* Increased margin between list items */
+    margin-bottom: var(--spacing-base);
     border-radius: var(--border-radius);
     box-shadow: 0 1px 3px var(--shadow-color);
     width: 100%;
+    text-align: center;
 }
+
 .friends-page {
     max-width: 400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: var(--spacing-large);
+    text-align: center;
 }
 
 .add-friend-section {
     display: flex;
     flex-direction: column;
-    /* Stack elements vertically */
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: var(--spacing-small);
+    margin-bottom: var(--spacing-large);
+    align-items: center;
 }
 
 .add-friend-section input {
-    padding: 10px;
+    padding: var(--spacing-small);
     border-radius: var(--border-radius);
     border: 1px solid #ccc;
     width: 100%;
-    /* Full width */
+    max-width: 300px;
+    text-align: center;
 }
 
 .add-friend-section button {
-    padding: 10px;
+    padding: var(--spacing-small);
     border-radius: var(--border-radius);
     background-color: var(--primary-color);
     color: var(--white-color);
@@ -459,17 +430,125 @@ li {
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 100%;
-    /* Full width */
+    max-width: 300px;
+    text-align: center;
 }
 
 .add-friend-section button:hover {
     background-color: var(--primary-hover-color);
 }
+
 .navbar-links li {
     padding: 0;
     align-items: center;
-        /* Vertically align the navbar list elements */
 }
+
+.friends-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--spacing-large);
+}
+
+.friends-table th,
+.friends-table td {
+  border: 1px solid #ccc;
+  padding: var(--spacing-small);
+  text-align: center;
+}
+
+.friends-table th {
+  background-color: var(--light-gray);
+}
+
+.friend-item .owe {
+  color: var(--primary-color);
+}
+
+.friend-item .owed {
+  color: var(--paid-color);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-large);
+}
+
+.profile-card {
+  background-color: var(--light-gray);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius);
+  box-shadow: 0 3px 10px var(--shadow-color);
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.profile-details label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-base);
+}
+
+.profile-details input {
+  padding: var(--spacing-small);
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-actions button {
+  padding: var(--spacing-small) var(--spacing-base);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.save-button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.cancel-button {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.cancel-button:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+.edit-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.edit-button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+.error-message {
+  color: red;
+  margin-top: var(--spacing-small);
+}
+
+.success-message {
+  color: green;
+  margin-top: var(--spacing-small);
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
 
@@ -479,27 +558,23 @@ li {
     .bills-page,
     .profile-container,
     .camera-page {
-        padding: 20px;
-        /* Slightly smaller padding for mobile */
-        margin: 20px 0;
+        padding: var(--spacing-base);
+        margin: var(--spacing-base) 0;
     }
 
     .navbar {
         justify-content: space-between;
-        /* Adjust spacing for smaller screens */
     }
 
     .navbar-links {
         flex-wrap: nowrap;
-        /* Prevent wrapping */
         overflow-x: auto;
-        /* Allow horizontal scrolling if needed */
         padding: 0;
     }
 
     .transaction-item,
     li {
-        padding: 15px;
+        padding: var(--spacing-base);
     }
 
     .camera-placeholder {
@@ -508,6 +583,50 @@ li {
 
     button,
     .button {
-        font-size: 16px;
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Additional Mobile Styles */
+@media (max-width: 480px) {
+
+    h1,
+    h2,
+    h3 {
+        font-size: var(--font-size-base);
+    }
+
+    .profile-card,
+    .container,
+    .register,
+    .bills-page,
+    .profile-container,
+    .camera-page {
+        padding: var(--spacing-small);
+        margin: var(--spacing-small) 0;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+        gap: var(--spacing-small);
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        gap: var(--spacing-small);
+    }
+
+    .navbar-links li {
+        width: 100%;
+    }
+
+    .friends-page {
+        max-width: 100%;
+        padding: var(--spacing-small);
+    }
+
+    .add-friend-section input,
+    .add-friend-section button {
+        max-width: 100%;
     }
 }
